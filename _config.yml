@@ -1,0 +1,6 @@
+name: iamnayr
+markdown: redcarpet
+pygments: true
+permalink: /:categories/:title
+url: http://localhost:4000
+exclude: [".rvmrc", "config.ru", "unicorn.rb", ".rbenv-version", ".gitignore", "README.md", "Rakefile", "changelog.md", "Gemfile", "Gemfile.lock", "Procfile", "vendor"]

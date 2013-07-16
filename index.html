@@ -1,0 +1,28 @@
+---
+layout: default
+title: iamnayr
+---
+
+<div id="home">
+  <ul class="posts">
+    {% for post in site.posts %}
+    <li><a  href="{{ post.url }}"><h2 class="post-title-link">{{ post.title }}</h2></a> </li>
+    <li><span>{{ post.date | date_to_string }}</span></li>
+    <div class="post">
+      {% if post.type == 'video' %} 
+        <div class="video-container">
+      {% endif %} 
+      {% if post.excerpt != 'blank' %}
+        <p>{{ post.excerpt }}</p>
+      {% else %}
+        <p>{{ post.content }}</p>
+      {% endif %} 
+      </div>
+      {% if post.type == 'video' %} 
+        </div>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+
+</div>
