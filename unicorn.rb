@@ -7,3 +7,9 @@ socket_path = "#{work_dir}tmp/sockets/unicorn.sock"
 pid_path = "#{work_dir}tmp/pids/unicorn.pid"
 err_log = "#{work_dir}log/unicorn.stderr.log"
 out_log = "#{work_dir}log/unicorn.stdout.log"
+
+working_directory work_dir
+listen socket_path, :backlog => 64
+pid pid_path
+stderr_path err_log
+stdout_path out_log
