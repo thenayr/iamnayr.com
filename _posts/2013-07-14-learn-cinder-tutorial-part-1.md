@@ -329,7 +329,7 @@ void RandomWalkerApp::draw()
 ```
 Feel free to run your application now and you should have a result very simliar to what you see at the top of this tutorial.  
 
-At this point you've gone through setting up a new Cinder application using Tinderbox, adding a new class interface (.h) and implementation file (.cpp) in Xcode, defining our class in the interface file and writing the actual implementation of that class.  You've also learnt some of the essential functions that come built into Cinder: `setup()`, `update()` and `draw()` as well as some idioms unique to C++. 
+By this point you've gone through setting up a new Cinder application using Tinderbox, adding a new class interface (.h) and implementation file (.cpp) in Xcode, defining our class in the interface file and writing the actual implementation of that class.  You've also learnt some of the essential functions that come built into Cinder: `setup()`, `update()` and `draw()` as well as some idioms unique to C++. 
 
 Although we have only just barely scratched the surface of what Cinder (and C++ for that matter) are capable of, hopefully you have a better understanding of the functionality of a Cinder application and maybe dissolved some of the initial fears you might have had in working with a language like C++. 
 

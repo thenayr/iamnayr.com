@@ -22,4 +22,4 @@ All of these tutorials have been created using the latest available version of C
 This isn't meant to be a definitive guide to Cinder nor a comprehensive guide to C++, however it should serve as a useful introduction to both.  C++ is a very complex language with extensive best practices that I won't pretend to understand, but that's OK.  It's still not terribly hard to create fun and exciting graphics driven programs that perform wonderfully. 
 
 # Let's begin
-Without further ado, let's proceed forward to [tutorial 1]()
+Without further ado, let's proceed forward to [tutorial 1](/tutorials/learn-cinder-tutorial-part-1/)

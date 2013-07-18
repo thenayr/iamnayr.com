@@ -65,11 +65,11 @@ task :cloudfront do
           small = cur
         end
         img_urls += <<-HTML
-<div class="center"><a href="http://cdn.iamnayr.com/uploads/#{year}/#{month}/#{large}" title="#{desc}"><img src="http://cdn.iamnayr.com/uploads/#{year}/#{month}/#{small}" alt="#{desc}"/></a></div>\n
+<div class="center"><a href="http://cdn.iamnayr.com/#{year}/#{month}/#{large}" title="#{desc}"><img src="http://cdn.iamnayr.com/#{year}/#{month}/#{small}" alt="#{desc}"/></a></div>\n
 HTML
       elsif !(/_1[0-9]00/.match(image))
         img_urls += <<-HTML
-<div class="center"><img src="http://cdn.iamnayr.com/uploads/#{year}/#{month}/#{cur}" alt="#{desc}"/></div>\n
+<div class="center"><img src="http://cdn.iamnayr.com/#{year}/#{month}/#{cur}" alt="#{desc}"/></div>\n
 HTML
       end
     else
