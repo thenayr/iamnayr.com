@@ -6,7 +6,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 set :domain, 'iamnayr.com'
 set :deploy_to, '/var/www/iamnayr.com'
 set :repository, 'git://github.com/thenayr/iamnayr.com.git'
-set :branch, 'remove-unicorn'
+set :branch, 'master'
 
 # Optional settings:
     set :user, 'deployer'    # Username in the server to SSH to.
