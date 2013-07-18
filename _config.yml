@@ -3,4 +3,4 @@ markdown: redcarpet
 pygments: true
 permalink: /:categories/:title
 url: http://localhost:4000
-exclude: ["tmp", "log", ".rvmrc", "config.ru", "unicorn.rb", ".rbenv-version", ".gitignore", "README.md", "Rakefile", "changelog.md", "Gemfile", "Gemfile.lock", "Procfile", "vendor"]
+exclude: ["config","tmp", "log", ".rvmrc", "config.ru", "unicorn.rb", ".rbenv-version", ".gitignore", "README.md", "Rakefile", "changelog.md", "Gemfile", "Gemfile.lock", "Procfile", "vendor"]
