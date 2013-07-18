@@ -1,8 +1,8 @@
 ---
 layout: picture
 title: "Processing 1"
-categories: pictures
-type: picture
+categories: tutorials
+type: post
 date: 2013-05-16 19:19:30 -0700
 excerpt: blank
 ---
