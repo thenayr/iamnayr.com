@@ -6,11 +6,11 @@ I've gone with [Digital Ocean](http://digitalocean.com) for hosting as it is ver
 
 ## Installation
 `bundle`
-Then simply have jekyll build the site
+Then have jekyll build the site
 `jekyll build`
 
 ## Deploy
-First configure the `config/deploy.rb` file to match your enviornment, then simply run a `mina setup` followed by `mina deploy`.  
+First configure the `config/deploy.rb` file to match your enviornment, then run a `mina setup` followed by `mina deploy`.  
 
 ## Notes
 I'm running Nginx as my webserver along with the [pagespeed module](https://github.com/pagespeed/ngx_pagespeed).
