@@ -9,7 +9,7 @@ excerpt: blank
 
 ![First generated image in processing](http://cdn.iamnayr.com/2013/05/2013-05-16--1368757019_1281x732_scrot.png)
 
-```java
+```javascript
 void setup() {
   size(1280,720);
   smooth();
