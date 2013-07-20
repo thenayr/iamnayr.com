@@ -48,6 +48,9 @@ img {
 .image-wrap {
   text-align:center;
 }
+pre{
+  max-height:30em;
+}
 
 /*****************************************************************************/
 /*
@@ -97,6 +100,7 @@ ul.posts li {
   padding-bottom:10px;
   padding-left:20px;
 }
+
 .site .tagline {
   margin-left:10px;
 }

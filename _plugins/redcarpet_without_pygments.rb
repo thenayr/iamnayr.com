@@ -13,7 +13,7 @@ module Jekyll
       @renderer ||= Class.new(Redcarpet::Render::HTML) do
         def block_code(code, lang)
           lang = lang && lang.split.first || "text"
-          output = '<pre><code class="language-' + lang + '">' + code + '</code></pre>'
+          output = '<pre class="line-numbers"><code class="language-' + lang + '">' + code + '</code></pre>'
         end
       end
     rescue LoadError
