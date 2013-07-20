@@ -14,6 +14,7 @@ title: iamnayr
       {% endif %} 
       {% if post.excerpt != 'blank' %}
         <p>{{ post.excerpt }}</p>
+        <a  href="{{ post.url }}"><span class="read-more-link">Read full post</span></a>
       {% else %}
         <p>{{ post.content }}</p>
       {% endif %} 

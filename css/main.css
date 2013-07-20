@@ -170,6 +170,9 @@ ul.posts li {
 /*****************************************************************************/
 
 /* standard */
+.post {
+  margin-bottom:15px;
+}
 
 .post ul, .post ol {
   margin-left: 1.35em;

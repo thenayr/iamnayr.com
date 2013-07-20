@@ -31,7 +31,7 @@ You can run the app as-is right now by hitting cmd+R and you should get a simple
 </div>
 
 ## A brief introduction to Cinder's built in functions
-Cinder comes pre-defined with several important functions.  Every Cinder project you ever create is made up of three main functions, these are setup(), update() and draw().  setup() is run only once, when you first start your program, update() and draw() are run for every frame of your application, first update() then draw(). There is an optional method called prepareSettings() which allows you to customize your application settings like framerate and window size. These are pretty self explanatory. Just remember, setup() runs once at the beginning, then update() + draw() every frame after that. Simple. 
+Cinder comes pre-defined with several important functions.  Every Cinder project you ever create is made up of three main functions, these are `setup()`, `update()` and `draw()`.  `setup()` is run only once, when you first start your program, `update()` and `draw()` are run for every frame of your application, first `update()` then `draw()`. There is an optional method called `prepareSettings()` which allows you to customize your application settings like framerate and window size. These are pretty self explanatory. Just remember, `setup()` runs once at the beginning, then `update()` + `draw()` every frame after that. Simple. 
 
 ## Creating our Walker class
 Great now let's move on to creating the class files for our Walker.  You can do this by right-clicking on the headers directory in the Xcode file browser and selecting "new file" followed by "C++ class" as the template type. 
