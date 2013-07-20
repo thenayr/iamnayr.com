@@ -1,11 +1,14 @@
 ---
 layout: post
-title: "Learning Cinder part 1"
+title: "Learning Cinder Tutorial 1"
 date: 2013-07-14 14:24:52 -0700
 categories: tutorials
 type: post
 ---
 ## Learning Cinder - The Nature of Code introduction chapter: Example 1
+<div class="image-wrap">
+<img width="600" height="98" src="http://cdn.iamnayr.com/2013/07/learning-cinder.png" alt="Learning Cinder image" .>
+</div>
 This is the first of the Learning Cinder tutorial series. This tutorial will cover the first example from the Introduction chapter of The Nature of Code. Please feel free to [reference that chapter here](http://natureofcode.com/book/introduction/).  In this example we will be utilizing a fundamental tool in the creative coders toolbelt, the ability to generate randomness.  Our specific implementation will be a "Walker" class that moves a circular point on screen either randomly in one of 4 directions: up, down, left or right. It looks a bit like this:  
 <div class="image-wrap">
 <img height="480" width="644" src="http://cdn.iamnayr.com/2013/07/ex1.gif" alt="Learning Cinder introduction example 1"/>

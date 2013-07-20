@@ -1,11 +1,14 @@
 ---
 layout: post
-title: "Learning Cinder tutorial 2"
+title: "Learning Cinder Tutorial 2"
 categories: tutorials
 date: 2013-07-18 21:41:25 -0700
 type: post
 ---
 ##Learning Cinder - The Nature of Code introduction chapter: Example 2
+<div class="image-wrap">
+<img width="600" height="98" src="http://cdn.iamnayr.com/2013/07/learning-cinder.png" alt="Learning Cinder image" .>
+</div>
 The inspiration for these tutorials came from the github repos of [nathankoch](https://github.com/nathankoch/nature-of-code-cinder) and [Mathieu Guillout](https://github.com/MathieuGuillout/TheNatureOfCodeCinder). 
 The [first tutorial of this series](http://www.iamnayr.com/tutorials/learn-cinder-tutorial-part-1/) covered the first example of the Nature of Code book. It touched on some core concepts of using C++ and the Cinder framework.  The second example isn't as involved, it is fairly simple in its implementation compared to the first example, has no classes and just a few variables, but helps demonstrate how random number distribution happens.
 This is what we will be creating:
