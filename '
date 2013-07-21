@@ -1,0 +1,124 @@
+---
+layout: post
+title: "How I deploy my Jekyll blog to Digital Ocean in under 5 seconds"
+categories: tutorials
+date: 2013-07-21 10:29:21 -0700
+type: post
+---
+##Blazing fast Jekyll blog deploys using Mina
+For the latest iteration of my blog, I knew I wanted to be able to deploy quickly and efficiently as well as have complete control over all aspects of my server, including caching, routing and cost.  For these reasons I knew migrating away from Heroku was unavoidable, anoter upside of that is I have total control over my data as well :) Just to be clear, I was previously using the free version of Heroku (thanks Heroku) so I have nothing bad to say about them, I just knew I could get a lot more bang for my buck elsewhere. I had heard quite the murmor about [Digital Ocean](https://www.digitalocean.com/?refcode=7349251230a0) (full disclosure I'm an affiliate, non affiliate link here - [Digital Ocean](http://www.digitalocean.com)) and the $5 price point really helped make the decision a no-brainer, ironically enough they did have a short outage while I was writing this tutorial, but they are very quick to respond and notify customers of problems very quickly.
+<div class="image-wrap">
+<img width="650" height="526" src="http://cdn.iamnayr.com/2013/07/mina-deploy.gif" alt="Mina deploy in 2 seconds"/>
+</div>
+
+My full time job involves deploying a lot of large scale and complex Rails applications, which typically consists of a combination of various scripts being triggered through [Capistrano](https://github.com/capistrano/capistrano).  Capistrano is fantastic, but overall felt a bit too heavy handed for what I was doing, essentially deploying static files to a remote server.  Enter [Mina](http://nadarei.co/mina/) (side note, I really have no idea how I should pronounce Mina.  "Minna" or maybe "Mine-a"), a super fast, lightweight and powerful deployment utility.  Check out this logo:
+
+<div class="image-wrap">
+<img width="175" height="194" src="http://cdn.iamnayr.com/2013/07/mina-logo.png" alt="Mina logo is awesome!" />
+</div>
+
+That logo alone was reason enough for me to give it a shot, it looks like a flippin' super villains chest piece.  Other promising aspects of Mina included:
+
+- Only ONE SSH session per deploy, compared to one session per COMMAND on Capistrano
+- Built on top of the already familiar Rake
+- Safe and bloody fast
+
+Convinced yet?  I certainly am, that's why I'm writing this tutorial.  Creating an account with Digital Ocean is dead simple,  make sure you [setup and add your SSH key](https://www.digitalocean.com/community/articles/how-to-set-up-ssh-keys--2) to allow for easier deployments. It's slightly outside the scope of this tutorial, so read the D.O. guide if you are having trouble.  
+
+##Notes before we begin
+I much prefer to manage my ruby versions using [RVM](http://rvm.io/), although that isn't a requirement for this to work by any means, but I will be using it in this guide.  I'm also not going to go too much into using [Jekyll](http://jekyllrb.com/), as I'm going to assume you already have an idea of how it works, or possibly are already using it.  Also might be worth noting that my client machine is a MacBook Air running the latest OSX 10.8.4, although there is absolutely no reason it wouldn't work anywhere.  My Digital Ocean droplet is running Ubuntu 12-04.
+
+##Configure your Jekyll blog to use mina
+As noted before, I use RVM and Gemfile's to simplify my projects and gem management.  Here is the `Gemfile` for my Jekyll blog:
+
+{% prism ruby %}
+#Gemfile
+source :rubygems
+gem "rake"                # actually not need for heroku but for the provided Rakefile
+gem "activesupport", "~> 3.2.11"
+gem "flickraw", "~> 0.9.6"
+gem "RedCloth"            # if you want to use the Textile Markup Language
+gem "redcarpet"
+gem "jekyll", "1.0.3" # we need at least this version so jekyll will use Ruby 1.9.2
+gem "pygmentize", "~> 0.0.3"
+gem "mina", "0.3.0"
+{% endprism %}
+
+The latest version of mina as of writing is "0.3.0".  To "minatize" our blog, make sure you bundle to install the gems, then run `bundle exec mina init`. This will create a ./config/deploy.rb file.  This is simply a Rake file with tasks for mina to run.  Let's look at a boilerplate mina file:
+
+{% prism ruby %}
+require 'mina/bundler'
+require 'mina/rails'
+require 'mina/git'
+# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+
+# Basic settings:
+#   domain       - The hostname to SSH to.
+#   deploy_to    - Path to deploy into.
+#   repository   - Git repo to clone from. (needed by mina/git)
+#   branch       - Branch name to deploy. (needed by mina/git)
+
+set :domain, 'foobar.com'
+set :deploy_to, '/var/www/foobar.com'
+set :repository, 'git://...'
+set :branch, 'master'
+
+# Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
+# They will be linked in the 'deploy:link_shared_paths' step.
+set :shared_paths, ['config/database.yml', 'log']
+
+# Optional settings:
+#   set :user, 'foobar'    # Username in the server to SSH to.
+#   set :port, '30000'     # SSH port number.
+
+# This task is the environment that is loaded for most commands, such as
+# `mina deploy` or `mina rake`.
+task :environment do
+  # If you're using rbenv, use this to load the rbenv environment.
+  # Be sure to commit your .rbenv-version to your repository.
+  # invoke :'rbenv:load'
+
+  # For those using RVM, use this to load an RVM version@gemset.
+  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+end
+
+# Put any custom mkdir's in here for when `mina setup` is ran.
+# For Rails apps, we'll make some of the shared paths that are shared between
+# all releases.
+task :setup => :environment do
+  queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
+
+  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+end
+
+desc "Deploys the current version to the server."
+task :deploy => :environment do
+  deploy do
+    # Put things that will set up an empty directory into a fully set-up
+    # instance of your project.
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:install'
+    invoke :'rails:db_migrate'
+    invoke :'rails:assets_precompile'
+
+    to :launch do
+      queue "touch #{deploy_to}/tmp/restart.txt"
+    end
+  end
+end
+
+# For help in making your deploy script, see the Mina documentation:
+#
+#  - http://nadarei.co/mina
+#  - http://nadarei.co/mina/tasks
+#  - http://nadarei.co/mina/settings
+#  - http://nadarei.co/mina/helpers
+
+{% endprism %}
