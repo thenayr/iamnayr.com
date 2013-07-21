@@ -187,7 +187,7 @@ task :deploy => :environment do
 end
 {% endprism %}
 
-Now anytime you are finished writing a post locally, commit and push it to github, then when you are ready for it to go live a simple `mina deploy` in your local directory will trigger the deployment to your remote server.
+Now anytime you are finished writing a post locally, commit and push it to github, then when you are ready for it to go live a simple `mina deploy` in your local directory will trigger the deployment to your remote server. The entire process typically takes under 3 seconds to run for my site.
 
 ##Wrapping up
 
