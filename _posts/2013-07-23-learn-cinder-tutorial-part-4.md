@@ -106,4 +106,58 @@ gl::drawSolidCircle(Vec2f(xPos_, app::getWindowHeight()/2), 16);
 
 Notice on our `gl::color()` function we are setting a fourth attribute for alpha value.  `gl::drawSolidCircle(Vec2f(xPos_, app::getWindowHeight()/2), 16);` draws our circles with a radius of 16 pixels.
 
+Here is our entire `NormalDistribution.cpp` file:
+
+{% prism c++ %}
+#include "cinder/app/AppNative.h"
+#include "cinder/gl/gl.h"
+#include "cinder/Rand.h"
+
+using namespace ci;
+using namespace ci::app;
+using namespace std;
+
+class NormalDistributionApp : public AppNative {
+  public:
+  void setup();
+  void mouseDown( MouseEvent event ); 
+  void update();
+  void draw();
+    
+    Rand generator_;
+    const float sd_ = 60;
+    float mean_;
+    float xPos_;
+    
+};
+
+void NormalDistributionApp::setup()
+{
+    gl::clear(Color(1, 1, 1));
+    gl::enableAlphaBlending();
+    
+    generator_.seed(randInt());
+    app::setWindowSize(600,200);
+    mean_ = getWindowWidth() / 2;
+}
+
+void NormalDistributionApp::mouseDown( MouseEvent event )
+{
+}
+
+void NormalDistributionApp::update()
+{
+    float num = generator_.nextGaussian();
+    xPos_ = sd_ * num + mean_;
+}
+
+void NormalDistributionApp::draw()
+{
+    gl::color(0, 0, 0, 0.08);
+    gl::drawSolidCircle( Vec2f(xPos_, getWindowHeight() / 2), 16);
+}
+
+CINDER_APP_NATIVE( NormalDistributionApp, RendererGl )
+{% endprism %}
+
 That's it!  Now we know how to work with numbers that are more realistic in the sense of randomness. We also worked with transparency for the first time by enabling alpha blending `gl::enableAlphaBlending();`, cool! Other than that, tutorial 4 should have been more a recap of what we have already learnt. You should be getting comforatable with the `setup()`, `update()` and `draw()` functions by now.
