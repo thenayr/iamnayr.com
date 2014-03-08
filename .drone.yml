@@ -1,0 +1,5 @@
+image: ubuntu
+env:
+script:
+services:
+  - mysql
